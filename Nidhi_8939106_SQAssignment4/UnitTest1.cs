@@ -87,8 +87,40 @@ namespace Nidhi_8939106_SQAssignment4
             AssertValidSubmission("$7000");
         }
 
+        [Test]
+        public void TC11_YoungDriverHighExperience()
+        {
+            FillForm("FirstName", "Khanpara", "16", "0", "0");
+            AssertFieldErrorMessage("experience", "Invalid experience for given age"); 
+        }
+        [Test]
+        public void TC12_ValidDataNoAccidentsOlderDriver()
+        {
+            FillForm("Nidhi", "Khanpara", "65", "40", "0");
+            AssertValidSubmission("$2840");
+        }
+        [Test]
+        public void TC13_YoungDriverManyAccidents()
+        {
+            FillForm("Nidhi", "Khanpara", "20", "2", "5");
+            AssertFieldErrorMessage("accidents", "No Insurance for you!!");
 
-        private void FillForm(
+        }
+        [Test]
+        public void TC14_InvalidAgeTooLow()
+        {
+            FillForm("Nidhi", "Khanpara", "15", "0", "0");
+            AssertFieldErrorMessage("age", "Age must be 16 or older");
+        }
+        [Test]
+        public void TC15_MaxExperienceNewDriver()
+        {
+            FillForm("Nidhi", "Khanpara", "35", "19", "0");
+            AssertFieldErrorMessage("experience", "Invalid experience for given age"); 
+        }
+
+
+            private void FillForm(
             string firstName,
             string lastName,
             string age,
