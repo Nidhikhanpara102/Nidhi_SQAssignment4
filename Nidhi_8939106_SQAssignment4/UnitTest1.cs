@@ -55,7 +55,39 @@ namespace Nidhi_8939106_SQAssignment4
             FillForm("Nidhi", "Khanpara", "28", "3", "0", email: "invalid@");
             AssertFieldErrorMessage("email", "Must be a valid email address");
         }
- 
+
+        [Test]
+        public void TC06_InvalidPostalCode()
+        {
+            FillForm("Nidhi", "Khanpara", "35", "15", "1", postalCode: "123 456");
+            AssertFieldErrorMessage("postalCode", "Postal Code must follow the pattern");
+        }
+        [Test]
+        public void TC07_AgeOmitted()
+        {
+            FillForm("Nidhi", "Khanpara", "", "5", "0");
+            AssertFieldErrorMessage("age", "Age (>=16) is required");
+        }
+        [Test]
+        public void TC08_AccidentsOmitted()
+        {
+            FillForm("Nidhi", "Khanpara", "37", "8", "");
+            AssertFieldErrorMessage("accidents", "Number of accidents is required");
+        }
+        [Test]
+        public void TC09_ExperienceOmitted()
+        {
+            FillForm("Nidhi", "Khanpara", "45", "", "0");
+            AssertFieldErrorMessage("experience", "Years of experience is required");
+        }
+        [Test]
+        public void TC10_NoDrivingExperienceHighAge()
+        {
+            FillForm("Nidhi", "Khanpara", "50", "0", "0");
+            AssertValidSubmission("$7000");
+        }
+
+
         private void FillForm(
             string firstName,
             string lastName,
